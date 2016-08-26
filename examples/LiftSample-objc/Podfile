@@ -1,0 +1,4 @@
+target "LiftSample-objc" do
+    pod "LoglyLift", :path => "../../"
+end
+

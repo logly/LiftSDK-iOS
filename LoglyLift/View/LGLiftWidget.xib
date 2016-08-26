@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LGLiftWidget"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="おすすめコンテンツ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztw-BP-beP">
+                    <rect key="frame" x="8" y="8" width="174" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="174" id="Om2-P7-ZM6"/>
+                        <constraint firstAttribute="width" constant="174" id="Qov-b0-G4s"/>
+                        <constraint firstAttribute="height" constant="21" id="cYu-bw-uxu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mX7-S7-LAQ" userLabel="partition">
+                    <rect key="frame" x="8" y="29" width="584" height="1"/>
+                    <color key="backgroundColor" red="0.90213923429319376" green="0.90213923429319376" blue="0.90213923429319376" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Jb4-pp-f6W"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agp-0D-8pd" userLabel="partition">
+                    <rect key="frame" x="8" y="570" width="584" height="1"/>
+                    <color key="backgroundColor" red="0.90213923429999998" green="0.90213923429999998" blue="0.90213923429999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="715-kz-yh9"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logly_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dGn-JW-L0S">
+                    <rect key="frame" x="537" y="578" width="51" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="8pj-Qo-PQZ"/>
+                        <constraint firstAttribute="width" constant="51" id="Pv5-Cw-Hcs"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recomended by" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8U0-lF-J6V">
+                    <rect key="frame" x="444" y="577" width="87" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="83" id="WWN-J3-mrZ"/>
+                        <constraint firstAttribute="width" constant="87" id="XKa-g7-P2z"/>
+                        <constraint firstAttribute="height" constant="24" id="lQN-bH-QiA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1000" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BiP-UC-7kP">
+                    <rect key="frame" x="8" y="34" width="584" height="532"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="bbf-2z-0dI">
+                        <size key="itemSize" width="300" height="72"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ztw-BP-beP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="4jT-YF-xyk"/>
+                <constraint firstAttribute="trailing" secondItem="dGn-JW-L0S" secondAttribute="trailing" constant="12" id="5tM-q9-lub"/>
+                <constraint firstAttribute="trailing" secondItem="mX7-S7-LAQ" secondAttribute="trailing" constant="8" id="EIu-Ys-6Hi"/>
+                <constraint firstAttribute="bottom" secondItem="8U0-lF-J6V" secondAttribute="bottom" constant="-1" id="Eav-Mt-jgU"/>
+                <constraint firstItem="BiP-UC-7kP" firstAttribute="top" secondItem="mX7-S7-LAQ" secondAttribute="bottom" constant="4" id="IL5-eZ-LO9"/>
+                <constraint firstAttribute="trailing" secondItem="BiP-UC-7kP" secondAttribute="trailing" constant="8" id="IR6-su-JRZ"/>
+                <constraint firstItem="BiP-UC-7kP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="LL5-4k-zFf"/>
+                <constraint firstAttribute="bottom" secondItem="dGn-JW-L0S" secondAttribute="bottom" constant="3" id="LtO-er-PgM"/>
+                <constraint firstItem="dGn-JW-L0S" firstAttribute="leading" secondItem="8U0-lF-J6V" secondAttribute="trailing" constant="6" id="Yse-nX-Fkl"/>
+                <constraint firstItem="agp-0D-8pd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="cSZ-20-q1n"/>
+                <constraint firstItem="mX7-S7-LAQ" firstAttribute="top" secondItem="ztw-BP-beP" secondAttribute="bottom" id="ccD-Bo-VXu"/>
+                <constraint firstItem="8U0-lF-J6V" firstAttribute="top" secondItem="agp-0D-8pd" secondAttribute="bottom" constant="6" id="e7L-sx-Kc2"/>
+                <constraint firstItem="ztw-BP-beP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="lwk-vE-N3R"/>
+                <constraint firstItem="mX7-S7-LAQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="mk7-nX-NB4"/>
+                <constraint firstItem="agp-0D-8pd" firstAttribute="top" secondItem="BiP-UC-7kP" secondAttribute="bottom" constant="4" id="ttq-Jj-hUU"/>
+                <constraint firstAttribute="trailing" secondItem="agp-0D-8pd" secondAttribute="trailing" constant="8" id="vDG-7k-cpU"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="logly_logo.png" width="55" height="21"/>
+    </resources>
+</document>
