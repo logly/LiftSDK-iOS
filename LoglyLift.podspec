@@ -11,9 +11,10 @@ Pod::Spec.new do |s|
     s.name             = "LoglyLift"
     s.version          = "0.9.0"
 
-    s.summary          = "Logly lift.json API"
+    s.summary          = "Logly lift SDK for iOS"
     s.description      = <<-DESC
-                         Logly lift.json API
+                         Logly lift SDK for iOS.
+                         Logly lift API & simple widget.
                          DESC
 
     s.platform     = :ios, '7.0'

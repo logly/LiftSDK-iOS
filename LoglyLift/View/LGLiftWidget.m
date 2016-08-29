@@ -44,7 +44,7 @@
     NSArray* views = [nib instantiateWithOwner:nil options:nil];
     UIView* view = (UIView*)views[0];
 
-    view.frame = self.bounds;
+    view.frame = self.bounds;
     view.translatesAutoresizingMaskIntoConstraints = YES;
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     
@@ -72,7 +72,7 @@
                         toplevel:@"items"
                completionHandler:^(LGInlineResponse200 *output, NSError *error) {
                    if (error != nil) {
-                       NSLog(error.localizedDescription);
+                       NSLog(@"error while accesss Lift: %s", error.localizedDescription);
                    } else {
                        self.items = output.items;
                        [self.collection reloadData];
