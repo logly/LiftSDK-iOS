@@ -9,12 +9,11 @@
 
 Pod::Spec.new do |s|
     s.name             = "LoglyLift"
-    s.version          = "0.9.0"
+    s.version          = "0.9.1"
 
-    s.summary          = "Logly lift SDK for iOS"
+    s.summary          = "Logly lift.json API"
     s.description      = <<-DESC
-                         Logly lift SDK for iOS.
-                         Logly lift API & simple widget.
+                         Logly lift.json API for Lift Mobile SDK
                          DESC
 
     s.platform     = :ios, '7.0'
@@ -29,7 +28,6 @@ Pod::Spec.new do |s|
 
     s.source_files = 'LoglyLift/**/*.{m,h}'
     s.public_header_files = 'LoglyLift/**/*.h'
-    s.resources = 'LoglyLift/**/*.{png,xib}'
 
 
     s.dependency 'AFNetworking', '~> 3'

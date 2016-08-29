@@ -11,7 +11,7 @@
 
 /**
 * Logly lift.json API
-* Logly lift.json API
+* Logly lift.json API for Lift Mobile SDK
 *
 * OpenAPI spec version: 1.0.0
 * 
