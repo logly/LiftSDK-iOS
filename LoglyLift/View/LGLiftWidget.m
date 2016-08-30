@@ -72,7 +72,7 @@
                         toplevel:@"items"
                completionHandler:^(LGInlineResponse200 *output, NSError *error) {
                    if (error != nil) {
-                       NSLog(@"error while accesss Lift: %s", error.localizedDescription);
+                       NSLog(@"error while accesss Lift: %@", error.localizedDescription);
                    } else {
                        self.items = output.items;
                        [self.collection reloadData];
