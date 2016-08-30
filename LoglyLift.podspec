@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
     s.name             = "LoglyLift"
-    s.version          = "0.9.1"
+    s.version          = "0.9.2"
 
     s.summary          = "Logly lift.json API"
     s.description      = <<-DESC

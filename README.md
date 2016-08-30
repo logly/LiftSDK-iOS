@@ -1,4 +1,5 @@
 # Logly Lift Mobile SDK (作成中)
+[![CocoaPods](https://img.shields.io/cocoapods/v/logly_lift_sdk.svg?maxAge=2592000)]()  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## 概要
 * iOS SDK: https://github.com/logly/LiftSDK-iOS
@@ -43,40 +44,8 @@ Android版のSDKライブラリをインストールするには、jCenterのmav
 
 ```
 dependencies {
-    compile 'jp.co.logly:lift-sdk:1.0.0'
+    compile 'jp.co.logly:lift-sdk:0.9.2'
 }
-```
-MEMO: 動作しない場合、以下の設定の全部または一部を追加してください
-
-```
-android {
-…
-    packagingOptions {
-        pickFirst 'META-INF/DEPENDENCIES.txt'
-        pickFirst 'META-INF/LICENSE.txt'
-        pickFirst 'META-INF/NOTICE.txt'
-        pickFirst 'META-INF/NOTICE'
-        pickFirst 'META-INF/LICENSE'
-        pickFirst 'META-INF/DEPENDENCIES'
-        pickFirst 'META-INF/notice.txt'
-        pickFirst 'META-INF/license.txt'
-        pickFirst 'META-INF/dependencies.txt'
-        pickFirst 'META-INF/LGPL2.1'
-    }
-}
-
-dependencies {
-    compile project(':lift-sdk-1.0.0')
-    compile "com.google.code.gson:gson:2.3.1"
-    compile "org.apache.httpcomponents:httpcore:4.4.4"
-    compile "org.apache.httpcomponents:httpclient:4.5.2"
-    compile ("org.apache.httpcomponents:httpcore:4.4.4") {
-        exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
-    }
-    compile ("org.apache.httpcomponents:httpmime:4.5.2") {
-        exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
-    }
-…
 ```
 
 もしAndroidManifestにネットアクセスの設定がない場合には、app/AndroidManifest.xmlに以下を追加
@@ -185,6 +154,4 @@ liftシステムでは、あらかじめページデータをシステムへ登�
 アップデートの時には、同じMDLを”url”フィールドに使い、新しい内容の他のデータを記述すればその内容にアップデートされます。
 削除の場合には、同じMDLを”url”フィールドに使い、他のすべての項目に空データを入れておけば削除されます。（現状、判定にはtitleとtextを使っています。両方が空の場合に削除されます）
 
-## 参考
-https://logly.qiita.com/adonishi@github/items/65621e30830de00bb5c0
-https://logly.qiita.com/adonishi@github/items/24a1678b04fabcd75050
+---
