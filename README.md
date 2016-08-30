@@ -1,5 +1,5 @@
 # Logly Lift Mobile SDK (作成中)
-[![CocoaPods](https://img.shields.io/cocoapods/v/logly_lift_sdk.svg?maxAge=2592000)]()  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CocoaPods](https://img.shields.io/cocoapods/v/LoglyLift.svg?maxAge=2592000)]()  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## 概要
 * iOS SDK: https://github.com/logly/LiftSDK-iOS
@@ -44,7 +44,7 @@ Android版のSDKライブラリをインストールするには、jCenterのmav
 
 ```
 dependencies {
-    compile 'jp.co.logly:lift-sdk:0.9.2'
+    compile 'jp.co.logly:lift-sdk:0.9.3'
 }
 ```
 
@@ -58,8 +58,8 @@ dependencies {
 このモバイルSDKには、iOS, Android それぞれに、シンプルなレコメンド表示用widget(View)が付属しています。このwidgetは内部でAPIを呼び出しその結果をwidget上に表示します。そのwidgetを使用したサンプルアプリがSDKに入っています。SDKユーザーはこのサンプルアプリを参考に、組み込みを行うことができます。
 
 ### シンプル widget : iOS
-1. storybord / xib (あるいはコード）等で、LGLiftWidgetを画面に配置
-2. その画面のViewController#viewDidLoad()などから、そのLGLiftWidgetにASyncリクエストを、requestByURL()でスタートさせる
+1. storybord / xib (あるいはコード）等で、UIViewのサブクラスとしてLGLiftWidgetを画面に配置
+2. その画面のViewController#viewDidLoad()などから、そのLGLiftWidgetにASyncリクエストをrequestByURL()でスタートさせる
 
 #### objective-c
 
