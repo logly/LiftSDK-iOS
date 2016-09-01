@@ -8,8 +8,8 @@
 
 #import "DetailViewController.h"
 
-#define kLoglySampleAdspotId @(3777016)
-#define kLoglySampleWidgetId @(1684)
+#define kLoglySampleAdspotId @(4228263)
+#define kLoglySampleWidgetId @(3624)
 #define kLoglySampleRef @"http://blog.logly.co.jp/"
 
 @interface DetailViewController ()
