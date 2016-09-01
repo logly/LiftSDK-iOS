@@ -14,8 +14,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var liftWidget: LGLiftWidget!
 
-    let kLoglySampleAdspotId = NSNumber(longLong: 3777016)
-    let kLoglySampleWidgetId = NSNumber(int: 1684)
+    let kLoglySampleAdspotId = NSNumber(longLong: 4228263)
+    let kLoglySampleWidgetId = NSNumber(int: 3624)
     let kLoglySampleRef = "http://blog.logly.co.jp/"
 
     var detailItem: [String: String]? {

@@ -1,5 +1,5 @@
 # Logly Lift Mobile SDK (作成中)
-[![CocoaPods](https://img.shields.io/cocoapods/v/LoglyLift.svg?maxAge=2592000)]()  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CocoaPods](https://img.shields.io/cocoapods/v/LoglyLift.svg?maxAge=2592000)](https://cocoapods.org/?q=loglylift)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## 概要
 * iOS SDK: https://github.com/logly/LiftSDK-iOS
@@ -28,13 +28,17 @@ liftシステムではページに対するレコメンドを行うので、モ�
 
 ## インストール: iOS
 iOS版のSDKのライブラリをインストールするには、cocoapodsを使います。https://cocoapods.org/
-組み込むアプリケーションのPodfileに、以下の行を追加してください。
+組み込むアプリケーションのPodfileに、以下の`use_frameworks!`と`pod “LoglyLift”`の行を追加してください。
 
 ```
-pod “LoglyLift”
+use_frameworks!
+...
+target ...
+  pod “LoglyLift”
 ```
 そしてコンソールから以下のコマンドを実行してください
-```sh
+
+```shell-session
 pod install
 ```
 
@@ -44,7 +48,7 @@ Android版のSDKライブラリをインストールするには、jCenterのmav
 
 ```
 dependencies {
-    compile 'jp.co.logly:lift-sdk:0.9.3'
+    compile 'jp.co.logly:lift-sdk:0.9.4'
 }
 ```
 
@@ -85,7 +89,7 @@ liftWidget.requestByURL( detail["url"],
 2. その画面のActivity/FragmentのonCreateView()などから、WidgetViewにAsyncリクエストをrequestByURL()でスタートさせる。
 
 ```java
-            liftWidget.requestByURL(mItem.url, new BigDecimal(3777016), new BigDecimal(1684), "http://blog.logly.co.jp/", new BigDecimal(1));
+liftWidget.requestByURL(mItem.url, 3777016, 1684, "http://blog.logly.co.jp/", 1);
 ```
 その際、そのページのURL(MDL)と、adspotID, widgetID, refが必要。
 
@@ -138,15 +142,18 @@ liftシステムでは、あらかじめページデータをシステムへ登�
 }
 ```
 内容(topレベル)：
+
 * user : Loglyからあらかじめお知らせしたユーザーIDを入れてください。
 * items : ページデーターの配列
+
 内容(ページデータ):
-* url : (required) キーとなるMDL。実際にweb上にページがある場合にはURLでも良い。
-* title : (required) タイトル #MEMO: max何文字？
-* summary : (optional) サマリー #MEMO: max何文字？titleとの違いは？
-* text : (required) 本文テキスト
-* image_size : (optional) サムネイル・イメージのサイズ。例：100x200
-* image_url : (optional) サムネイル・イメージのURL。iOS9でのATSに抵触する可能性がある場合にはHTTPS上にイメージを置いてください。
+
+* url : (**required**) キーとなるMDL。実際にweb上にページがある場合にはURLでも良い。
+* title : (**required**) タイトル
+* summary : (optional) サマリー
+* text : (**required**) 本文テキスト
+* image_size : (**required**) サムネイル・イメージのサイズ。例：100x200
+* image_url : (**required**) サムネイル・イメージのURL。iOS9でのATSに抵触する可能性がある場合にはHTTPS上にイメージを置いてください。
 * pubdate : (optional)ページ投稿日時。ISO 8601 フォーマット。例："2015-11-10T03:00:00Z"
 
 ### アップデート＆削除方法

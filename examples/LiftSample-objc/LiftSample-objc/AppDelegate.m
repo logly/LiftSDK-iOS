@@ -54,7 +54,7 @@
             if ([url.pathComponents[1] isEqualToString:@"page"]) {
                 self.detailNumByOpenURL = [NSNumber numberWithInt:[url.pathComponents[2] intValue]];
                 UISplitViewController *splitViewController = (UISplitViewController*)self.window.rootViewController;
-                UINavigationController *navigationController = (UINavigationController*)splitViewController.viewControllers[splitViewController.viewControllers.count-1];
+                UINavigationController *navigationController = (UINavigationController*)splitViewController.viewControllers[0];
                 MasterViewController *masterController = (MasterViewController*)navigationController.viewControllers[0];
                 [masterController performSegueWithIdentifier:@"showDetail" sender:self];
                 return YES;

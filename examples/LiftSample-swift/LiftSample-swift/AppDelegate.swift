@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
+        splitViewController.preferredDisplayMode = .PrimaryHidden
         return true
     }
 
@@ -52,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 if pathes[1] == "page" {
                     detailNumByOpenURL = Int(pathes[2])
                     let splitViewController = self.window!.rootViewController as! UISplitViewController
-                    let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
+                    let navigationController = splitViewController.viewControllers.first as! UINavigationController
                     let masterController = navigationController.viewControllers[0] as! MasterViewController
                     masterController.performSegueWithIdentifier("showDetail" , sender:self)
                     return true
