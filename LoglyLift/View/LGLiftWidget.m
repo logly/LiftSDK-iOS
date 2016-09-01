@@ -104,32 +104,30 @@
         cell.textLabel.text = item.lead;
         cell.subtextLabel.text = item.title;
         
-        NSString* protocol = [[NSURL URLWithString:item.url].scheme stringByAppendingString:@":"];
-
         dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(q_global, ^{
             // image.
-            NSString *url = item.imageUrl;
-            if ([url hasPrefix:@"//"]) {
-                url = [protocol stringByAppendingString:url];
-            }
+            NSString *imageUrl = item.imageUrl;
             NSError *error = nil;
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url] options:NSDataReadingUncached error:&error];
-            UIImage *image = [UIImage imageWithData:data];
 
-            if (image != nil ) {
-                dispatch_queue_t q_main   = dispatch_get_main_queue();
-                dispatch_async(q_main, ^{
-                    cell.imageView.image = image;
-                });
+            if (imageUrl != nil) {
+                imageUrl = [self resolveUrl:imageUrl referenceUrl:item.url];
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl] options:NSDataReadingUncached error:&error];
+                UIImage *image = [UIImage imageWithData:data];
+
+                if (image != nil ) {
+                    dispatch_queue_t q_main   = dispatch_get_main_queue();
+                    dispatch_async(q_main, ^{
+                        cell.imageView.image = image;
+                    });
+                }
             }
 
             // beacon.
-            url = item.beaconUrl;
-            if ([url hasPrefix:@"//"]) {
-                url = [protocol stringByAppendingString:url];
+            NSString *beacon_url = [self resolveUrl:item.beaconUrl referenceUrl:item.url];
+            if (beacon_url != nil) {
+                [NSData dataWithContentsOfURL:[NSURL URLWithString:beacon_url] options:NSDataReadingUncached error:&error];
             }
-            [NSData dataWithContentsOfURL:[NSURL URLWithString:url] options:NSDataReadingUncached error:&error];
         });
     }
     return cell;
@@ -139,20 +137,39 @@
 {
     LGInlineResponse200Items *item = self.items[indexPath.item];
 
-    dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(q_global, ^{
-        // click tracking.
-        NSString* protocol = [[NSURL URLWithString:item.url].scheme stringByAppendingString:@":"];
-        NSString *url = item.ldUrl;
-        if ([url hasPrefix:@"//"]) {
-            url = [protocol stringByAppendingString:url];
-        }
-        NSError *error = nil;
-        [NSData dataWithContentsOfURL:[NSURL URLWithString:url] options:NSDataReadingUncached error:&error];
-    });
+    NSString *trackUrl = item.url;
+    NSString *openUrl = item.ldUrl;
+    if (openUrl == nil) {
+        openUrl = trackUrl;
+        trackUrl = nil;
+    }
+    
+    if (trackUrl != nil) {
+        dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(q_global, ^{
+            // click tracking.
+            NSString *trackUrl2 = [self resolveUrl:openUrl referenceUrl:trackUrl];
+            NSError *error = nil;
+            [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl2] options:NSDataReadingUncached error:&error];
+        });
+    }
 
     // open URL.
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
+    openUrl = [self resolveUrl:openUrl referenceUrl:item.url];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl]];
+}
+
+- (NSString*)resolveUrl:(NSString*)url referenceUrl:(NSString*)ref
+{
+    if (url == nil) {
+        return nil;
+    }
+
+    NSString* protocol = [[NSURL URLWithString:ref].scheme stringByAppendingString:@":"];
+    if ([url hasPrefix:@"//"]) {
+        return [protocol stringByAppendingString:url];
+    }
+    return url;
 }
 
 @end
