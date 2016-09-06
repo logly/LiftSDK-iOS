@@ -755,7 +755,7 @@ margin-bottom: 20px;
     },
     "url" : {
       "type" : "string",
-      "description" : "ページのURL(MDL)"
+      "description" : "click計測用のアクセスURL(アクセスするとld_urlと同じURLへのリダイレクトが返信される)"
     },
     "title" : {
       "type" : "string",
@@ -763,7 +763,7 @@ margin-bottom: 20px;
     },
     "ld_url" : {
       "type" : "string",
-      "description" : "click計測用のアクセスURL"
+      "description" : "ページのURL(MDL)"
     }
   }
 };
@@ -890,7 +890,7 @@ public class DefaultApiExample {
         Long widgetId = 789; // Long | Lift wiget ID
         String url = url_example; // String | キーとなるページ URL (MDL)
         String ref = ref_example; // String | リファラーURL（通常Mobileでは必要なし）
-        String toplevel = toplevel_example; // String | json toplevel hash名: 通常は'items'を指定
+        String toplevel = toplevel_example; // String | jsonトップレベルhash名: 通常は'items'を指定
         try {
             inline_response_200 result = apiInstance.requestLift(adspotId, widgetId, url, ref, toplevel);
             System.out.println(result);
@@ -917,7 +917,7 @@ public class DefaultApiExample {
         Long widgetId = 789; // Long | Lift wiget ID
         String url = url_example; // String | キーとなるページ URL (MDL)
         String ref = ref_example; // String | リファラーURL（通常Mobileでは必要なし）
-        String toplevel = toplevel_example; // String | json toplevel hash名: 通常は'items'を指定
+        String toplevel = toplevel_example; // String | jsonトップレベルhash名: 通常は'items'を指定
         try {
             inline_response_200 result = apiInstance.requestLift(adspotId, widgetId, url, ref, toplevel);
             System.out.println(result);
@@ -944,7 +944,7 @@ Long *adspotId = 789; // Lift adspot ID
 Long *widgetId = 789; // Lift wiget ID
 String *url = url_example; // キーとなるページ URL (MDL)
 String *ref = ref_example; // リファラーURL（通常Mobileでは必要なし） (optional)
-String *toplevel = toplevel_example; // json toplevel hash名: 通常は'items'を指定 (optional) (default to items)
+String *toplevel = toplevel_example; // jsonトップレベルhash名: 通常は'items'を指定 (optional) (default to items)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -979,7 +979,7 @@ var url = url_example; // {String} キーとなるページ URL (MDL)
 
 var opts = { 
   'ref': ref_example, // {String} リファラーURL（通常Mobileでは必要なし）
-  'toplevel': toplevel_example // {String} json toplevel hash名: 通常は'items'を指定
+  'toplevel': toplevel_example // {String} jsonトップレベルhash名: 通常は'items'を指定
 };
 
 var callback = function(error, data, response) {
@@ -1018,7 +1018,7 @@ namespace Example
             var widgetId = 789;  // Long | Lift wiget ID
             var url = url_example;  // String | キーとなるページ URL (MDL)
             var ref = ref_example;  // String | リファラーURL（通常Mobileでは必要なし） (optional) 
-            var toplevel = toplevel_example;  // String | json toplevel hash名: 通常は'items'を指定 (optional)  (default to items)
+            var toplevel = toplevel_example;  // String | jsonトップレベルhash名: 通常は'items'を指定 (optional)  (default to items)
 
             try
             {
@@ -1048,7 +1048,7 @@ $adspotId = 789; // Long | Lift adspot ID
 $widgetId = 789; // Long | Lift wiget ID
 $url = url_example; // String | キーとなるページ URL (MDL)
 $ref = ref_example; // String | リファラーURL（通常Mobileでは必要なし）
-$toplevel = toplevel_example; // String | json toplevel hash名: 通常は'items'を指定
+$toplevel = toplevel_example; // String | jsonトップレベルhash名: 通常は'items'を指定
 
 try {
     $result = $api_instance->requestLift($adspotId, $widgetId, $url, $ref, $toplevel);
@@ -1224,7 +1224,7 @@ try {
 													var schemaWrapper = {
   "name" : "toplevel",
   "in" : "query",
-  "description" : "json toplevel hash名: 通常は'items'を指定",
+  "description" : "jsonトップレベルhash名: 通常は'items'を指定",
   "required" : false,
   "type" : "string",
   "default" : "items"
@@ -1392,7 +1392,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2016-09-01T17:07:20.122+09:00
+                    Generated 2016-09-06T18:05:53.895+09:00
                 </div>
             </div>
         </div>
