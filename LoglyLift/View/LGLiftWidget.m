@@ -45,8 +45,7 @@
     UIView* view = (UIView*)views[0];
 
     view.frame = self.bounds;
-    view.translatesAutoresizingMaskIntoConstraints = YES;
-    view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    view.autoresizingMask = 0;
     
     self.collection = [view viewWithTag:1000];
     if (self.collection) {
@@ -60,6 +59,18 @@
     }
 
     [self addSubview:view];
+}
+
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+
+    for (UIView* view in self.subviews) {
+        CGRect frame = view.frame;
+        frame.size.width = self.frame.size.width;
+        view.frame = frame;
+        [view layoutIfNeeded];
+    }
 }
 
 - (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)wedgetId ref:(NSString*)ref
