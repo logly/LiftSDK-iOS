@@ -61,13 +61,13 @@
 /* イメージのURL [optional]
  */
 @property(nonatomic) NSString* imageUrl;
-/* ページのURL(MDL) [optional]
+/* click計測用のアクセスURL(アクセスするとld_urlと同じURLへのリダイレクトが返信される) [optional]
  */
 @property(nonatomic) NSString* url;
 /* タイトル [optional]
  */
 @property(nonatomic) NSString* title;
-/* click計測用のアクセスURL [optional]
+/* ページのURL(MDL) [optional]
  */
 @property(nonatomic) NSString* ldUrl;
 

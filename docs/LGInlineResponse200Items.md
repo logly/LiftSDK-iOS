@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **site** | **NSString*** |  | [optional] 
 **isArticle** | **NSNumber*** | 1 &#x3D; true, レコメンドが見つからず、広告が返ってきた場合 | [optional] 
 **imageUrl** | **NSString*** | イメージのURL | [optional] 
-**url** | **NSString*** | ページのURL(MDL) | [optional] 
+**url** | **NSString*** | click計測用のアクセスURL(アクセスするとld_urlと同じURLへのリダイレクトが返信される) | [optional] 
 **title** | **NSString*** | タイトル | [optional] 
-**ldUrl** | **NSString*** | click計測用のアクセスURL | [optional] 
+**ldUrl** | **NSString*** | ページのURL(MDL) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
