@@ -28,7 +28,7 @@ NSNumber* adspotId = @789; // Lift adspot ID
 NSNumber* widgetId = @789; // Lift wiget ID
 NSString* url = @"url_example"; // キーとなるページ URL (MDL)
 NSString* ref = @"ref_example"; // リファラーURL（通常Mobileでは必要なし） (optional)
-NSString* toplevel = @"items"; // json toplevel hash名: 通常は'items'を指定 (optional) (default to items)
+NSString* toplevel = @"items"; // jsonトップレベルhash名: 通常は'items'を指定 (optional) (default to items)
 
 LGDefaultApi*apiInstance = [[LGDefaultApi alloc] init];
 
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
  **widgetId** | **NSNumber***| Lift wiget ID | 
  **url** | **NSString***| キーとなるページ URL (MDL) | 
  **ref** | **NSString***| リファラーURL（通常Mobileでは必要なし） | [optional] 
- **toplevel** | **NSString***| json toplevel hash名: 通常は&#39;items&#39;を指定 | [optional] [default to items]
+ **toplevel** | **NSString***| jsonトップレベルhash名: 通常は&#39;items&#39;を指定 | [optional] [default to items]
 
 ### Return type
 

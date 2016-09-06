@@ -41,7 +41,7 @@ extern NSInteger kLGDefaultApiMissingParamErrorCode;
 /// @param widgetId Lift wiget ID
 /// @param url キーとなるページ URL (MDL)
 /// @param ref リファラーURL（通常Mobileでは必要なし） (optional)
-/// @param toplevel json toplevel hash名: 通常は&#39;items&#39;を指定 (optional) (default to items)
+/// @param toplevel jsonトップレベルhash名: 通常は&#39;items&#39;を指定 (optional) (default to items)
 /// 
 ///  code:200 message:"正常実行時"
 ///

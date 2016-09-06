@@ -80,7 +80,7 @@ NSInteger kLGDefaultApiMissingParamErrorCode = 234513;
 ///
 ///  @param ref リファラーURL（通常Mobileでは必要なし） (optional)
 ///
-///  @param toplevel json toplevel hash名: 通常は'items'を指定 (optional, default to items)
+///  @param toplevel jsonトップレベルhash名: 通常は'items'を指定 (optional, default to items)
 ///
 ///  @returns LGInlineResponse200*
 ///
