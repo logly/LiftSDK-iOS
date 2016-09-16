@@ -50,7 +50,7 @@ Android版のSDKライブラリをインストールするには、jCenterのmav
 
 ```
 dependencies {
-    compile 'jp.co.logly:lift-sdk:0.9.5'
+    compile 'jp.co.logly:lift-sdk:0.9.6'
 }
 ```
 
@@ -62,12 +62,13 @@ dependencies {
 
 ---
 
-## SDK: シンプル widget　＆　サンプルアプリ
-このモバイルSDKには、iOS, Android それぞれに、シンプルなレコメンド表示用widget(View)が付属しています。このwidgetは内部でAPIを呼び出しその結果をwidget上に表示します。そのwidgetを使用したサンプルアプリがSDKに入っています。SDKユーザーはこのサンプルアプリを参考に、組み込みを行うことができます。
+## SDKの内容:
+このモバイルSDKには、iOS, Android それぞれに、シンプルなレコメンド表示用widget(View)が付属しています。このwidgetは内部でAPIを呼び出しその結果をwidget上に表示し、（正しい計測に必要な）ビーコン＆トラキングURLにアクセスします。そのwidgetを使用したサンプルアプリがSDKに入っています。SDKユーザーはこのサンプルアプリを参考に、組み込みを行うことができます。その他、SDKにはLiftサービスに低レベルアクセスをするためのAPI-clientも入っています。独自のwidgetを作成する場合にはこれを使って作ることができます。
 
-### シンプル widget : iOS
+### ○　シンプル widgetの使い方 : iOS
 1. storybord / xib (あるいはコード）等で、UIViewのサブクラスとしてLGLiftWidgetを画面に配置
-2. その画面のViewController#viewDidLoad()などから、そのLGLiftWidgetにASyncリクエストをrequestByURL()でスタートさせる
+2. その画面のViewController#viewDidLoad()などから、そのLGLiftWidgetにリクエストをrequestByURL()でスタートさせます。実際のアクセスは別スレッド等で行われ、このメソッドはすぐに戻ります。
+3. レコメンドの表示数はwidgetの大きさで決まります。一つのレコメンドセルの大きさは300x72なので、それを単位に変更すると良いでしょう。（注：最大数は、Liftコンソールの側でも設定できます）
 
 #### objective-c
 
@@ -86,20 +87,61 @@ liftWidget.requestByURL( detail["url"],
                          widgetId:NSNumber(int: 1684),
                          ref:"http://blog.logly.co.jp/")
 ```
-その際、そのページのURL(MDL)と、adspotID, widgetID, refが必要。
 
-### シンプル widget : Android
+### ○　シンプル widgetの使い方 : Android
 1. layoutリソースや、コード上で、jp.co.logly.Lift.WidgetViewを画面上に配置
-2. その画面のActivity/FragmentのonCreateView()などから、WidgetViewにAsyncリクエストをrequestByURL()でスタートさせる。
+2. その画面のActivity/FragmentのonCreateView()などから、WidgetViewにリクエストをrequestByURL()でスタートさせます。実際のアクセスは別スレッド等で行われ、このメソッドはすぐに戻ります。
+3. レコメンドの表示数はwidgetの大きさで決まります。一つのレコメンドセルの大きさは300x72なので、それを単位に変更すると良いでしょう。（注：最大数は、Liftコンソールの側でも設定できます）
 
 ```java
 liftWidget.requestByURL(mItem.url, 3777016, 1684, "http://blog.logly.co.jp/", 1);
 ```
-その際、そのページのURL(MDL)と、adspotID, widgetID, refが必要。
+
+### requestByURLのパラメータ
+
+* url: キーとなる、ページURL(MDL)
+* adspotID: Loglyが発行したadspotID
+* widgetID: Loglyが発行したwidgetID
+* ref: リファラーURL(通常、モバイル版では必要なし)
+
+### Clickコールバック : iOS
+
+* swift
+
+```swift
+liftWidget.onWigetItemClickCallback = {(widget, url, item) -> Bool in
+    // do something useful.
+    return true; // we handled click. do not need to open in browser.
+}
+```
+
+* Objective-C
+
+```objc
+self.liftWidget.onWigetItemClickCallback = ^(LGLiftWidget *widget, NSString *url, LGInlineResponse200Items *item) {
+    // do something useful.
+    return YES; // we handled click. do not need to open in browser.
+};
+```
+このonWigetItemClickCallbackにコールバックを登録しておくと、レコメンドのアイテムがクリックされた時に、このコールバックが呼ばれます。このコールバック関数の戻り値としてtrueを返すと、widgetはその先の処理をやめます。（ブラウザでURLをオープンしない）
 
 
-### サンプルアプリの実行方法
-#### iOS (Swift or Objective-C)
+### Clickコールバック : Android
+
+```java
+liftWidget.mOnWigetItemClickListener = new WidgetView.OnWigetItemClickListener() {
+                @Override
+                public boolean onItemClick(WidgetView widget, String url, InlineResponse200Items item) {
+                    /* do something useful. */
+                    return true; /* we handled click. do not need to open in browser. */
+                }
+            };
+```
+このmOnWigetItemClickListenerにコールバックのListnerを登録しておくと、レコメンドのアイテムがクリックされた時に、このListnerが呼ばれます。このListnerの戻り値としてtrueを返すと、widgetはその先の処理をやめます。（ブラウザでURLをオープンしない）
+
+
+### ○　サンプルアプリについて
+#### iOS (Swift or Objective-C)版サンプルアプリの実行方法
 
 ```
 cd examples/LiftSample-{swift,objc}
@@ -108,12 +150,12 @@ open LiftSample-{swift,objc}.xcworkspace
 ```
 * Xcodeが開くので、Run.
 
-#### Android
+#### Android版サンプルアプリの実行方法
 
 * Android StudioでSDKのディレクトリを開く
 * Run
 
-## SDK: API client
+### ○　SDK: API client
 SDKのAPI clientを使用して直接lift APIへアクセスし、レコメンド結果を取得することで、独自のビューなどで表示することなどもできます。
 シンプルwidgetの内部でもこのAPI clientを使用しています。SDKのソースコードも公開していますので、widgetのコードも参考にしてください。
 API clientの仕様については、別ファイルのAPIドキュメント[API.html](//:./API.html)を参照してください。

@@ -13,6 +13,7 @@
 @interface LGLiftWidget ()
 @property UICollectionView* collection;
 @property NSArray<LGInlineResponse200Items>* items;
+@property NSMutableDictionary* sentBeaconIndexes;
 @end
 
 @implementation LGLiftWidget
@@ -38,6 +39,7 @@
 - (void)setup
 {
     self.items = nil;
+    self.onWigetItemClickCallback = nil;
 
     NSBundle* bundle = [NSBundle bundleForClass:[self class]];
     UINib *nib = [UINib nibWithNibName:@"LGLiftWidget" bundle:bundle];
@@ -71,10 +73,14 @@
         view.frame = frame;
         [view layoutIfNeeded];
     }
+    
+    [self sendBeaconIfNeeded];
 }
 
 - (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)wedgetId ref:(NSString*)ref
 {
+    self.sentBeaconIndexes = @{}.mutableCopy;   // clear
+    
     LGDefaultApi* api = [LGDefaultApi sharedAPI];
     [api requestLiftWithAdspotId:adspotId
                         widgetId:wedgetId
@@ -83,12 +89,47 @@
                         toplevel:@"items"
                completionHandler:^(LGInlineResponse200 *output, NSError *error) {
                    if (error != nil) {
-                       NSLog(@"error while accesss Lift: %@", error.localizedDescription);
-                   } else {
-                       self.items = output.items;
-                       [self.collection reloadData];
+                       NSLog(@"LiftWidget - error while accesss Lift: %@", error.localizedDescription);
+                       return;
                    }
+                   self.items = output.items;
+                   [self.collection reloadData];
+                   [self.collection layoutIfNeeded];
+                   [self sendBeaconIfNeeded];
                }];
+}
+
+- (void) sendBeaconIfNeeded
+{
+    CGRect contentFrame = self.collection.frame;
+    contentFrame.origin = self.collection.contentOffset;
+    
+    NSArray* visibles = self.collection.visibleCells;
+    [visibles enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        LGLiftWidgetCell *cell = (LGLiftWidgetCell*)obj;
+        NSIndexPath *indexPath = [self.collection indexPathForCell:cell];
+        if (cell != nil &&
+            CGRectContainsRect(contentFrame, cell.frame) &&
+            self.sentBeaconIndexes[@(indexPath.item)] == nil) {
+
+            // send beacon.
+            LGInlineResponse200Items *item = self.items[indexPath.item];
+            NSString *beacon_url = [self resolveUrl:item.beaconUrl referenceUrl:item.url];
+            
+            if (beacon_url != nil && beacon_url.length > 0) {
+                NSError *error;
+                [NSData dataWithContentsOfURL:[NSURL URLWithString:beacon_url] options:NSDataReadingUncached error:&error];
+                if (error != nil) {
+                    NSLog(@"LiftWidget - error while sending beacon: %@", error.localizedDescription);
+                } else {
+                    self.sentBeaconIndexes[@(indexPath.item)] = @(YES);
+//                    NSLog(@"LiftWidget - beacon sent: %@", beacon_url);
+                }
+//            } else {
+//                NSLog(@"LiftWidget - no beacon_url.");
+            }
+        }
+    }];
 }
 
 #pragma mark - UICollectionView Datasource / Delegate.
@@ -112,8 +153,11 @@
 
     if (self.items != nil && indexPath.item < self.items.count) {
         LGInlineResponse200Items *item = self.items[indexPath.item];
-        cell.textLabel.text = item.lead;
-        cell.subtextLabel.text = item.title;
+        cell.textLabel.text = item.title;
+        cell.subtextLabel.text = nil;
+        if (item.isArticle.longValue == 0 && item.advertisingSubject != nil) {
+            cell.subtextLabel.text = [@"PR: " stringByAppendingString: item.advertisingSubject];
+        }
         
         dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(q_global, ^{
@@ -124,6 +168,11 @@
             if (imageUrl != nil) {
                 imageUrl = [self resolveUrl:imageUrl referenceUrl:item.url];
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl] options:NSDataReadingUncached error:&error];
+                if (error != nil) {
+                    NSLog(@"LiftWidget - error while getting image: %@", error.localizedDescription);
+                    return;
+                }
+
                 UIImage *image = [UIImage imageWithData:data];
 
                 if (image != nil ) {
@@ -132,12 +181,6 @@
                         cell.imageView.image = image;
                     });
                 }
-            }
-
-            // beacon.
-            NSString *beacon_url = [self resolveUrl:item.beaconUrl referenceUrl:item.url];
-            if (beacon_url != nil) {
-                [NSData dataWithContentsOfURL:[NSURL URLWithString:beacon_url] options:NSDataReadingUncached error:&error];
             }
         });
     }
@@ -159,14 +202,23 @@
         dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(q_global, ^{
             // click tracking.
-            NSString *trackUrl2 = [self resolveUrl:openUrl referenceUrl:trackUrl];
             NSError *error = nil;
-            [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl2] options:NSDataReadingUncached error:&error];
+            [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl] options:NSDataReadingUncached error:&error];
+            if (error != nil) {
+                if (error.domain != kCFErrorDomainCocoa && error.code != 256) { // 256 = NSFileReadUnknownError: redirected to custom schema. ignore.
+                    NSLog(@"LiftWidget - error while tracking access: %@ -> %@", error.localizedDescription, trackUrl);
+                }
+            }
         });
     }
 
     // open URL.
     openUrl = [self resolveUrl:openUrl referenceUrl:item.url];
+    if (self.onWigetItemClickCallback != nil) {
+        if (self.onWigetItemClickCallback(self, openUrl, item)) {
+            return; // stop handle.
+        }
+    }
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl]];
 }
 
