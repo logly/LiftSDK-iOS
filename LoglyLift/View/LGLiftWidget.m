@@ -152,8 +152,11 @@
 
     if (self.items != nil && indexPath.item < self.items.count) {
         LGInlineResponse200Items *item = self.items[indexPath.item];
-        cell.textLabel.text = item.lead;
-        cell.subtextLabel.text = item.title;
+        cell.textLabel.text = item.title;
+        cell.subtextLabel.text = nil;
+        if (item.isArticle.longValue == 0) {
+            cell.subtextLabel.text = [@"PR: " stringByAppendingString: item.advertisingSubject];
+        }
         
         dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(q_global, ^{
