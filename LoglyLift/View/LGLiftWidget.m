@@ -39,6 +39,7 @@
 - (void)setup
 {
     self.items = nil;
+    self.onWigetItemClickCallback = nil;
 
     NSBundle* bundle = [NSBundle bundleForClass:[self class]];
     UINib *nib = [UINib nibWithNibName:@"LGLiftWidget" bundle:bundle];
@@ -154,7 +155,7 @@
         LGInlineResponse200Items *item = self.items[indexPath.item];
         cell.textLabel.text = item.title;
         cell.subtextLabel.text = nil;
-        if (item.isArticle.longValue == 0) {
+        if (item.isArticle.longValue == 0 && item.advertisingSubject != nil) {
             cell.subtextLabel.text = [@"PR: " stringByAppendingString: item.advertisingSubject];
         }
         
@@ -201,17 +202,23 @@
         dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(q_global, ^{
             // click tracking.
-            NSString *trackUrl2 = [self resolveUrl:openUrl referenceUrl:trackUrl];
             NSError *error = nil;
-            [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl2] options:NSDataReadingUncached error:&error];
+            [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl] options:NSDataReadingUncached error:&error];
             if (error != nil) {
-                NSLog(@"LiftWidget - error while tracking access: %@", error.localizedDescription);
+                if (error.domain != kCFErrorDomainCocoa && error.code != 256) { // 256 = NSFileReadUnknownError: redirected to custom schema. ignore.
+                    NSLog(@"LiftWidget - error while tracking access: %@ -> %@", error.localizedDescription, trackUrl);
+                }
             }
         });
     }
 
     // open URL.
     openUrl = [self resolveUrl:openUrl referenceUrl:item.url];
+    if (self.onWigetItemClickCallback != nil) {
+        if (self.onWigetItemClickCallback(self, openUrl, item)) {
+            return; // stop handle.
+        }
+    }
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl]];
 }
 
