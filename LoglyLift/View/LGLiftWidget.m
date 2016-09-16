@@ -13,6 +13,7 @@
 @interface LGLiftWidget ()
 @property UICollectionView* collection;
 @property NSArray<LGInlineResponse200Items>* items;
+@property NSMutableDictionary* sentBeaconIndexes;
 @end
 
 @implementation LGLiftWidget
@@ -71,10 +72,14 @@
         view.frame = frame;
         [view layoutIfNeeded];
     }
+    
+    [self sendBeaconIfNeeded];
 }
 
 - (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)wedgetId ref:(NSString*)ref
 {
+    self.sentBeaconIndexes = @{}.mutableCopy;   // clear
+    
     LGDefaultApi* api = [LGDefaultApi sharedAPI];
     [api requestLiftWithAdspotId:adspotId
                         widgetId:wedgetId
@@ -83,12 +88,47 @@
                         toplevel:@"items"
                completionHandler:^(LGInlineResponse200 *output, NSError *error) {
                    if (error != nil) {
-                       NSLog(@"error while accesss Lift: %@", error.localizedDescription);
-                   } else {
-                       self.items = output.items;
-                       [self.collection reloadData];
+                       NSLog(@"LiftWidget - error while accesss Lift: %@", error.localizedDescription);
+                       return;
                    }
+                   self.items = output.items;
+                   [self.collection reloadData];
+                   [self.collection layoutIfNeeded];
+                   [self sendBeaconIfNeeded];
                }];
+}
+
+- (void) sendBeaconIfNeeded
+{
+    CGRect contentFrame = self.collection.frame;
+    contentFrame.origin = self.collection.contentOffset;
+    
+    NSArray* visibles = self.collection.visibleCells;
+    [visibles enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        LGLiftWidgetCell *cell = (LGLiftWidgetCell*)obj;
+        NSIndexPath *indexPath = [self.collection indexPathForCell:cell];
+        if (cell != nil &&
+            CGRectContainsRect(contentFrame, cell.frame) &&
+            self.sentBeaconIndexes[@(indexPath.item)] == nil) {
+
+            // send beacon.
+            LGInlineResponse200Items *item = self.items[indexPath.item];
+            NSString *beacon_url = [self resolveUrl:item.beaconUrl referenceUrl:item.url];
+            
+            if (beacon_url != nil && beacon_url.length > 0) {
+                NSError *error;
+                [NSData dataWithContentsOfURL:[NSURL URLWithString:beacon_url] options:NSDataReadingUncached error:&error];
+                if (error != nil) {
+                    NSLog(@"LiftWidget - error while sending beacon: %@", error.localizedDescription);
+                } else {
+                    self.sentBeaconIndexes[@(indexPath.item)] = @(YES);
+//                    NSLog(@"LiftWidget - beacon sent: %@", beacon_url);
+                }
+//            } else {
+//                NSLog(@"LiftWidget - no beacon_url.");
+            }
+        }
+    }];
 }
 
 #pragma mark - UICollectionView Datasource / Delegate.
@@ -124,6 +164,11 @@
             if (imageUrl != nil) {
                 imageUrl = [self resolveUrl:imageUrl referenceUrl:item.url];
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl] options:NSDataReadingUncached error:&error];
+                if (error != nil) {
+                    NSLog(@"LiftWidget - error while getting image: %@", error.localizedDescription);
+                    return;
+                }
+
                 UIImage *image = [UIImage imageWithData:data];
 
                 if (image != nil ) {
@@ -132,12 +177,6 @@
                         cell.imageView.image = image;
                     });
                 }
-            }
-
-            // beacon.
-            NSString *beacon_url = [self resolveUrl:item.beaconUrl referenceUrl:item.url];
-            if (beacon_url != nil) {
-                [NSData dataWithContentsOfURL:[NSURL URLWithString:beacon_url] options:NSDataReadingUncached error:&error];
             }
         });
     }
@@ -162,6 +201,9 @@
             NSString *trackUrl2 = [self resolveUrl:openUrl referenceUrl:trackUrl];
             NSError *error = nil;
             [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl2] options:NSDataReadingUncached error:&error];
+            if (error != nil) {
+                NSLog(@"LiftWidget - error while tracking access: %@", error.localizedDescription);
+            }
         });
     }
 
