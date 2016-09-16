@@ -10,6 +10,7 @@ import UIKit
 import LoglyLift
 
 class DetailViewController: UIViewController {
+    var isDebugMode = false;
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var liftWidget: LGLiftWidget!
@@ -30,14 +31,38 @@ class DetailViewController: UIViewController {
         if let detail = self.detailItem {
             if let label = self.detailDescriptionLabel {
                 label.text = detail["text"]
+                let gesture = UILongPressGestureRecognizer(target: self, action: #selector(DetailViewController.longpressed(_:)))
+                label.addGestureRecognizer(gesture)
+                label.userInteractionEnabled = true
             }
             if liftWidget != nil {
                 liftWidget.requestByURL(detail["url"],
                                     adspotId:kLoglySampleAdspotId,
                                     widgetId:kLoglySampleWidgetId,
                                     ref:kLoglySampleRef)
+                
+                liftWidget.onWigetItemClickCallback = {(widget, url, item) -> Bool in
+                    if self.isDebugMode {
+                        let alert = UIAlertController(title: "Debug Mode", message: url, preferredStyle: .Alert)
+                        alert.addAction(UIAlertAction(title: "Dissmis", style: .Cancel, handler:nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        return true;
+                    }
+                    return false;
+                }
             }
         }
+    }
+    
+    func longpressed(gesture:UIGestureRecognizer) {
+        if gesture.state != UIGestureRecognizerState.Ended {
+            return
+        }
+        self.isDebugMode = true
+
+        let alert = UIAlertController(title: "Debug Mode", message: "Debug Mode Enabled", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Dissmis", style: .Cancel, handler:nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
