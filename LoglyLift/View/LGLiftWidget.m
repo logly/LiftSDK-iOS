@@ -77,13 +77,13 @@
     [self sendBeaconIfNeeded];
 }
 
-- (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)wedgetId ref:(NSString*)ref
+- (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)widgetId ref:(NSString*)ref
 {
     self.sentBeaconIndexes = @{}.mutableCopy;   // clear
     
     LGDefaultApi* api = [LGDefaultApi sharedAPI];
     [api requestLiftWithAdspotId:adspotId
-                        widgetId:wedgetId
+                        widgetId:widgetId
                              url:url
                              ref:ref
                         toplevel:@"items"
