@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
                 liftWidget.onWigetItemClickCallback = {(widget, url, item) -> Bool in
                     if self.isDebugMode {
                         let alert = UIAlertController(title: "Debug Mode", message: url, preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "Dissmis", style: .Cancel, handler:nil))
+                        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler:nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                         return true;
                     }
@@ -61,7 +61,7 @@ class DetailViewController: UIViewController {
         self.isDebugMode = true
 
         let alert = UIAlertController(title: "Debug Mode", message: "Debug Mode Enabled", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Dissmis", style: .Cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler:nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
