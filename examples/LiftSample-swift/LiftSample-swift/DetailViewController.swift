@@ -15,8 +15,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     @IBOutlet weak var liftWidget: LGLiftWidget!
 
-    let kLoglySampleAdspotId = NSNumber(longLong: 4228263)
-    let kLoglySampleWidgetId = NSNumber(int: 3624)
+    let kLoglySampleAdspotId = NSNumber(value: 4228263 as Int64)
+    let kLoglySampleWidgetId = NSNumber(value: 3624 as Int32)
     let kLoglySampleRef = "http://blog.logly.co.jp/"
 
     var detailItem: [String: String]? {
@@ -33,19 +33,19 @@ class DetailViewController: UIViewController {
                 label.text = detail["text"]
                 let gesture = UILongPressGestureRecognizer(target: self, action: #selector(DetailViewController.longpressed(_:)))
                 label.addGestureRecognizer(gesture)
-                label.userInteractionEnabled = true
+                label.isUserInteractionEnabled = true
             }
             if liftWidget != nil {
-                liftWidget.requestByURL(detail["url"],
+                liftWidget.request(byURL: detail["url"],
                                     adspotId:kLoglySampleAdspotId,
                                     widgetId:kLoglySampleWidgetId,
                                     ref:kLoglySampleRef)
                 
                 liftWidget.onWigetItemClickCallback = {(widget, url, item) -> Bool in
                     if self.isDebugMode {
-                        let alert = UIAlertController(title: "Debug Mode", message: url, preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler:nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        let alert = UIAlertController(title: "Debug Mode", message: url, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:nil))
+                        self.present(alert, animated: true, completion: nil)
                         return true;
                     }
                     return false;
@@ -54,15 +54,15 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func longpressed(gesture:UIGestureRecognizer) {
-        if gesture.state != UIGestureRecognizerState.Ended {
+    func longpressed(_ gesture:UIGestureRecognizer) {
+        if gesture.state != UIGestureRecognizerState.ended {
             return
         }
         self.isDebugMode = true
 
-        let alert = UIAlertController(title: "Debug Mode", message: "Debug Mode Enabled", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler:nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Debug Mode", message: "Debug Mode Enabled", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {

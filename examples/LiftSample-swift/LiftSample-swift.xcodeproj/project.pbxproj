@@ -224,13 +224,16 @@
 					58223FB01D42189E00E0FCE2 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = KKP3M5SNXW;
+						LastSwiftMigration = 0810;
 					};
 					58223FC61D42189E00E0FCE2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 58223FB01D42189E00E0FCE2;
 					};
 					58223FD11D42189E00E0FCE2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 58223FB01D42189E00E0FCE2;
 					};
 				};
@@ -488,6 +491,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.logly.LiftSample-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "59b45d6a-16f7-4790-92b1-3638de6bd46f";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -503,6 +507,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.logly.LiftSample-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "59b45d6a-16f7-4790-92b1-3638de6bd46f";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -514,6 +519,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.logly.LiftSample-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiftSample-swift.app/LiftSample-swift";
 			};
 			name = Debug;
@@ -526,6 +532,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.logly.LiftSample-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiftSample-swift.app/LiftSample-swift";
 			};
 			name = Release;
@@ -537,6 +544,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.logly.LiftSample-swiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "LiftSample-swift";
 			};
 			name = Debug;
@@ -548,6 +556,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.logly.LiftSample-swiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "LiftSample-swift";
 			};
 			name = Release;
