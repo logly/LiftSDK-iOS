@@ -50,7 +50,7 @@ Android版のSDKライブラリをインストールするには、jCenterのmav
 
 ```
 dependencies {
-    compile 'jp.co.logly:lift-sdk:0.9.7'
+    compile 'jp.co.logly:lift-sdk:'
 }
 ```
 
@@ -68,7 +68,7 @@ dependencies {
 ### ○　シンプル widgetの使い方 : iOS
 1. storybord / xib (あるいはコード）等で、UIViewのサブクラスとしてLGLiftWidgetを画面に配置
 2. その画面のViewController#viewDidLoad()などから、そのLGLiftWidgetにリクエストをrequestByURL()でスタートさせます。実際のアクセスは別スレッド等で行われ、このメソッドはすぐに戻ります。
-3. レコメンドの表示数はwidgetの大きさで決まります。一つのレコメンドセルの大きさは300x72なので、それを単位に変更すると良いでしょう。（注：最大数は、Liftコンソールの側でも設定できます）
+3. レコメンドの表示数はwidgetの大きさで決まります。一つのレコメンドセルの大きさは300x72（マージン込みで302x74。ヘッダ・フッタの高さは34）なので、それを単位に変更すると良いでしょう。（注：最大数は、Liftコンソールの側でも設定できます）
 
 #### objective-c
 
