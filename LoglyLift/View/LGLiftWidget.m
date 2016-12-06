@@ -10,6 +10,12 @@
 #import "LGLiftWidgetCell.h"
 #import "LGDefaultApi.h"
 
+
+#define kLiftItemCellWidth 300
+#define kLiftItemCellHeight 72
+#define kCellMargin 2
+
+
 @interface LGLiftWidget ()
 @property UICollectionView* collection;
 @property NSArray<LGInlineResponse200Items>* items;
@@ -74,6 +80,7 @@
         [view layoutIfNeeded];
     }
     
+    [self.collection.collectionViewLayout invalidateLayout];
     [self sendBeaconIfNeeded];
 }
 
@@ -123,10 +130,7 @@
                     NSLog(@"LiftWidget - error while sending beacon: %@", error.localizedDescription);
                 } else {
                     self.sentBeaconIndexes[@(indexPath.item)] = @(YES);
-//                    NSLog(@"LiftWidget - beacon sent: %@", beacon_url);
                 }
-//            } else {
-//                NSLog(@"LiftWidget - no beacon_url.");
             }
         }
     }];
@@ -187,6 +191,14 @@
     return cell;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    int colNum = collectionView.bounds.size.width / kLiftItemCellWidth;
+    int leftWidth = collectionView.bounds.size.width - (colNum * kLiftItemCellWidth + (colNum -1) * kCellMargin);
+    int cellWidth = kLiftItemCellWidth + leftWidth / colNum;
+    return CGSizeMake(cellWidth, kLiftItemCellHeight);
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LGInlineResponse200Items *item = self.items[indexPath.item];
@@ -205,7 +217,7 @@
             NSError *error = nil;
             [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl] options:NSDataReadingUncached error:&error];
             if (error != nil) {
-                if (error.domain != kCFErrorDomainCocoa && error.code != 256) { // 256 = NSFileReadUnknownError: redirected to custom schema. ignore.
+                if (error.domain != kCFErrorDomainCocoa && error.code != NSFileReadUnknownError) { // redirected to custom schema. ignore.
                     NSLog(@"LiftWidget - error while tracking access: %@ -> %@", error.localizedDescription, trackUrl);
                 }
             }

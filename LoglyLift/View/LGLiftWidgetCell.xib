@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,24 +19,39 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9R1-Fa-258">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9R1-Fa-258">
                         <rect key="frame" x="8" y="6" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="qZ9-gj-AVQ"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJn-4c-xXk">
-                        <rect key="frame" x="75" y="49" width="225" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJn-4c-xXk">
+                        <rect key="frame" x="75" y="49" width="217" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFx-3D-RU9">
-                        <rect key="frame" x="75" y="8" width="225" height="43"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFx-3D-RU9">
+                        <rect key="frame" x="75" y="8" width="217" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="GFx-3D-RU9" secondAttribute="bottom" constant="21" id="8Xg-k6-4bX"/>
+                <constraint firstItem="9R1-Fa-258" firstAttribute="top" secondItem="hck-G7-RaB" secondAttribute="top" constant="6" id="EO7-yC-kiO"/>
+                <constraint firstItem="GFx-3D-RU9" firstAttribute="trailing" secondItem="UJn-4c-xXk" secondAttribute="trailing" id="FuV-Y7-ZHz"/>
+                <constraint firstAttribute="bottom" secondItem="UJn-4c-xXk" secondAttribute="bottom" constant="5" id="KmH-Df-7mZ"/>
+                <constraint firstItem="UJn-4c-xXk" firstAttribute="top" secondItem="hck-G7-RaB" secondAttribute="top" constant="49" id="PB4-NJ-hdz"/>
+                <constraint firstItem="9R1-Fa-258" firstAttribute="leading" secondItem="hck-G7-RaB" secondAttribute="leadingMargin" id="RpG-1k-9Xq"/>
+                <constraint firstItem="GFx-3D-RU9" firstAttribute="leading" secondItem="9R1-Fa-258" secondAttribute="trailing" constant="7" id="n4c-c7-Ixd"/>
+                <constraint firstItem="GFx-3D-RU9" firstAttribute="top" secondItem="hck-G7-RaB" secondAttribute="topMargin" id="oWb-xY-DrA"/>
+                <constraint firstItem="GFx-3D-RU9" firstAttribute="trailing" secondItem="hck-G7-RaB" secondAttribute="trailingMargin" id="t3h-1T-4lV"/>
+                <constraint firstItem="9R1-Fa-258" firstAttribute="centerY" secondItem="hck-G7-RaB" secondAttribute="centerY" id="yNC-aU-Zae"/>
+                <constraint firstItem="GFx-3D-RU9" firstAttribute="leading" secondItem="UJn-4c-xXk" secondAttribute="leading" id="zHf-TO-pGN"/>
+            </constraints>
             <size key="customSize" width="427" height="76"/>
             <connections>
                 <outlet property="imageView" destination="9R1-Fa-258" id="qm1-ax-Vcw"/>

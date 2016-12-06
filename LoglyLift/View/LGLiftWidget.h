@@ -20,9 +20,9 @@
 @property (nonatomic, copy) BOOL (^onWigetItemClickCallback)(LGLiftWidget *widget, NSString *url, LGInlineResponse200Items *item);
 
 /**
- request Lift recomendations asyncronusly.
+ request Lift recommendations asyncronusly.
  note that actual access will be run by other thread. so this method returns soon.
- @param url page URL (/MDL) for recomendation key.
+ @param url page URL (/MDL) for recommendation key.
  @param adspotId Adspot ID, obtained from Logly.
  @param widgetId Widget ID, obtained from Logly.
  @param ref Referer URL, can be empty (usually not used in mobile client).
