@@ -220,7 +220,7 @@
             NSError *error = nil;
             [NSData dataWithContentsOfURL:[NSURL URLWithString:trackUrl] options:NSDataReadingUncached error:&error];
             if (error != nil) {
-                if (error.domain != kCFErrorDomainCocoa && error.code != NSFileReadUnknownError) { // redirected to custom schema. ignore.
+                if ([error.domain isEqualToString: (NSString*)kCFErrorDomainCocoa] && error.code != NSFileReadUnknownError) { // redirected to custom schema. ignore.
                     NSLog(@"LiftWidget - error while tracking access: %@ -> %@", error.localizedDescription, trackUrl);
                 }
             }
