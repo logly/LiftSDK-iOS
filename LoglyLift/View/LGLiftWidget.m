@@ -124,13 +124,16 @@
             NSString *beacon_url = [self resolveUrl:item.beaconUrl referenceUrl:item.url];
             
             if (beacon_url != nil && beacon_url.length > 0) {
-                NSError *error;
-                [NSData dataWithContentsOfURL:[NSURL URLWithString:beacon_url] options:NSDataReadingUncached error:&error];
-                if (error != nil) {
-                    NSLog(@"LiftWidget - error while sending beacon: %@", error.localizedDescription);
-                } else {
-                    self.sentBeaconIndexes[@(indexPath.item)] = @(YES);
-                }
+                dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(q_global, ^{
+                    NSError *error;
+                    [NSData dataWithContentsOfURL:[NSURL URLWithString:beacon_url] options:NSDataReadingUncached error:&error];
+                    if (error != nil) {
+                        NSLog(@"LiftWidget - error while sending beacon: %@", error.localizedDescription);
+                    } else {
+                        self.sentBeaconIndexes[@(indexPath.item)] = @(YES);
+                    }
+                });
             }
         }
     }];
@@ -193,7 +196,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    int colNum = collectionView.bounds.size.width / kLiftItemCellWidth;
+    int colNum = fmax(1, collectionView.bounds.size.width / kLiftItemCellWidth);
     int leftWidth = collectionView.bounds.size.width - (colNum * kLiftItemCellWidth + (colNum -1) * kCellMargin);
     int cellWidth = kLiftItemCellWidth + leftWidth / colNum;
     return CGSizeMake(cellWidth, kLiftItemCellHeight);
