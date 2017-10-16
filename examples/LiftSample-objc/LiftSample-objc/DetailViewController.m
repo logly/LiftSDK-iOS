@@ -10,7 +10,7 @@
 
 #define kLoglySampleAdspotId @(4228263)
 #define kLoglySampleWidgetId @(3624)
-#define kLoglySampleRef @"http://blog.logly.co.jp/"
+#define kLoglySampleRef @"" // NOTE: ref_url can be empty string in mobile sdk.
 
 @interface DetailViewController ()
 @property BOOL isDebugMode;

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **url** | **NSString*** | click計測用のアクセスURL(アクセスするとld_urlと同じURLへのリダイレクトが返信される) | [optional] 
 **title** | **NSString*** | タイトル | [optional] 
 **ldUrl** | **NSString*** | ページのURL(MDL) | [optional] 
+**category** | **NSString*** | カテゴリ名 | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

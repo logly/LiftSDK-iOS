@@ -3,6 +3,8 @@
 #import "LGQueryParamCollection.h"
 #import <ISO8601/ISO8601.h>
 
+NSString * const kLGApplicationJSONType = @"application/json";
+
 NSString * LGPercentEscapedStringFromString(NSString *string) {
     static NSString * const kLGCharactersGeneralDelimitersToEncode = @":#[]@";
     static NSString * const kLGCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
@@ -42,8 +44,6 @@ NSString * LGPercentEscapedStringFromString(NSString *string) {
 @end
 
 @implementation LGSanitizer
-
-static NSString * kApplicationJSONType = @"application/json";
 
 -(instancetype)init {
     self = [super init];
@@ -141,7 +141,7 @@ static NSString * kApplicationJSONType = @"application/json";
     NSMutableArray *lowerAccepts = [[NSMutableArray alloc] initWithCapacity:[accepts count]];
     for (NSString *string in accepts) {
         if ([self.jsonHeaderTypeExpression matchesInString:string options:0 range:NSMakeRange(0, [string length])].count > 0) {
-            return kApplicationJSONType;
+            return kLGApplicationJSONType;
         }
         [lowerAccepts addObject:[string lowercaseString]];
     }
@@ -153,12 +153,12 @@ static NSString * kApplicationJSONType = @"application/json";
  */
 - (NSString *) selectHeaderContentType:(NSArray *)contentTypes {
     if (contentTypes.count == 0) {
-        return kApplicationJSONType;
+        return kLGApplicationJSONType;
     }
     NSMutableArray *lowerContentTypes = [[NSMutableArray alloc] initWithCapacity:[contentTypes count]];
     for (NSString *string in contentTypes) {
         if([self.jsonHeaderTypeExpression matchesInString:string options:0 range:NSMakeRange(0, [string length])].count > 0){
-            return kApplicationJSONType;
+            return kLGApplicationJSONType;
         }
         [lowerContentTypes addObject:[string lowercaseString]];
     }

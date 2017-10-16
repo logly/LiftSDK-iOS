@@ -764,6 +764,10 @@ margin-bottom: 20px;
     "ld_url" : {
       "type" : "string",
       "description" : "ページのURL(MDL)"
+    },
+    "category" : {
+      "type" : "string",
+      "description" : "カテゴリ名"
     }
   }
 };
@@ -808,7 +812,7 @@ margin-bottom: 20px;
                 <div id="api-_">
                     <h2 id="welcome-to-apidoc">API & SDK ドキュメント</h2>
 
-                        <div class="app-desc">Version: 1.0.0</div>
+                        <div class="app-desc">Version: 1.0.1</div>
 
 
                     <hr>
@@ -865,7 +869,7 @@ margin-bottom: 20px;
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="examples-Default-requestLift-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> "https://l.logly.co.jp//lift.json?adspotId=&widgetId=&url=&ref=&toplevel="
+curl -X <span style="text-transform: uppercase;">get</span> "https://l.logly.co.jp/lift.json?adspotId=&widgetId=&url=&ref=&toplevel="
 
 
 </code></pre>
@@ -1002,8 +1006,8 @@ api.requestLift(adspotId, widgetId, url, opts, callback);
                                                     <pre class="prettyprint"><code class="language-cs">
 using System;
 using System.Diagnostics;
-using .Api;
-using .Client;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
 using jp.co.logly.Lift.Result;
 
 namespace Example
@@ -1305,7 +1309,8 @@ try {
       "image_url" : "//blog.logly.co.jp/system/attachments/images/000/015/761/large_thumb/NYTNativeAdsMashable20140911.png?1411215063",
       "url" : "http://dsp.logly.co.jp/click?ad=2j4KDug5b2DnW6T0pAeCe7d0oMpu9VtkWmfNLt2tjhfEvLoM1VgFtNsyYJd968mDlNYOkuNXZjVcNM5vTrolSJi1vDOijD_BVQExha-W4QpbT3Kg5YzmEEjeXHJH1HP9wMSbRbAn516pCEoHEV7YP9_sDhDZWL2icmTnS1IqVab67Hwf2bAlwAC_lfl6bZQSGu3FnuwQjnzc0xpD_O469LPw6vN6ETS5unGEdLmOrBdwxEEDX1X83Y73os6f6avvhwIP6_U50yIlX2bzkvXNS0XBuwwvslWEv97mF2jgJsHFEj7haqgnvkLw0PFn4WhMZoBmXCVDk5GXXjCF_yIlik4_H37mIFN4K_bjGrN493hNuNjSZeSxuxyJjHOrKXcmx8b3HyRJVr0U-FJEKqQwav7ImwCXaW4iaEMVTsQK2hLJtZJUChMhFv04BGvSuYwibpceiV_X4Maem9fv0qvDq4RxcIBT4VGqP2mIHQZGyvmDP9IkMnMjz0eAAaFjYIogbvXnMPf40Cs",
       "title" : "NYタイムズが「広告主」として出稿したネイティブ広告コンテンツとは",
-      "ld_url" : "http://blog.logly.co.jp/20140922/000010"
+      "ld_url" : "http://blog.logly.co.jp/20140922/000010",
+      "category" : "category1"
     } ]
   }
 };
@@ -1346,7 +1351,7 @@ try {
 
 
                                                         <div class="tab-pane" id="examples-Default-requestLift-example">
-                                                            <pre class="prettyprint"><code class="json">[{published_at&#x3D;2014-09-22T00:00:00.000+0000, lead&#x3D;NYタイムズは今月上旬から、外部のメディアサイトのネイティブ広告を利用し始めています。, advertising_subject&#x3D;null, score&#x3D;0.19019964, image_width&#x3D;324, beacon_url&#x3D;http://abc.logly.co.jp/abc?ac&#x3D;HR5i0ZF5T7OohlyNfmMqTQ&amp;pt&#x3D;1&amp;sp&#x3D;3777016&amp;st&#x3D;http%3A%2F%2Fblog.logly.co.jp%2F&amp;lg&#x3D;similarity&amp;wd&#x3D;1684&amp;ct&#x3D;5, image_height&#x3D;370, site&#x3D;blog.logly.co.jp, is_article&#x3D;1, image_url&#x3D;//blog.logly.co.jp/system/attachments/images/000/015/761/large_thumb/NYTNativeAdsMashable20140911.png?1411215063, url&#x3D;http://dsp.logly.co.jp/click?ad&#x3D;2j4KDug5b2DnW6T0pAeCe7d0oMpu9VtkWmfNLt2tjhfEvLoM1VgFtNsyYJd968mDlNYOkuNXZjVcNM5vTrolSJi1vDOijD_BVQExha-W4QpbT3Kg5YzmEEjeXHJH1HP9wMSbRbAn516pCEoHEV7YP9_sDhDZWL2icmTnS1IqVab67Hwf2bAlwAC_lfl6bZQSGu3FnuwQjnzc0xpD_O469LPw6vN6ETS5unGEdLmOrBdwxEEDX1X83Y73os6f6avvhwIP6_U50yIlX2bzkvXNS0XBuwwvslWEv97mF2jgJsHFEj7haqgnvkLw0PFn4WhMZoBmXCVDk5GXXjCF_yIlik4_H37mIFN4K_bjGrN493hNuNjSZeSxuxyJjHOrKXcmx8b3HyRJVr0U-FJEKqQwav7ImwCXaW4iaEMVTsQK2hLJtZJUChMhFv04BGvSuYwibpceiV_X4Maem9fv0qvDq4RxcIBT4VGqP2mIHQZGyvmDP9IkMnMjz0eAAaFjYIogbvXnMPf40Cs, title&#x3D;NYタイムズが「広告主」として出稿したネイティブ広告コンテンツとは, ld_url&#x3D;http://blog.logly.co.jp/20140922/000010}]</code></pre>
+                                                            <pre class="prettyprint"><code class="json">[{published_at&#x3D;2014-09-22T00:00:00.000+0000, lead&#x3D;NYタイムズは今月上旬から、外部のメディアサイトのネイティブ広告を利用し始めています。, advertising_subject&#x3D;null, score&#x3D;0.19019964, image_width&#x3D;324, beacon_url&#x3D;http://abc.logly.co.jp/abc?ac&#x3D;HR5i0ZF5T7OohlyNfmMqTQ&amp;pt&#x3D;1&amp;sp&#x3D;3777016&amp;st&#x3D;http%3A%2F%2Fblog.logly.co.jp%2F&amp;lg&#x3D;similarity&amp;wd&#x3D;1684&amp;ct&#x3D;5, image_height&#x3D;370, site&#x3D;blog.logly.co.jp, is_article&#x3D;1, image_url&#x3D;//blog.logly.co.jp/system/attachments/images/000/015/761/large_thumb/NYTNativeAdsMashable20140911.png?1411215063, url&#x3D;http://dsp.logly.co.jp/click?ad&#x3D;2j4KDug5b2DnW6T0pAeCe7d0oMpu9VtkWmfNLt2tjhfEvLoM1VgFtNsyYJd968mDlNYOkuNXZjVcNM5vTrolSJi1vDOijD_BVQExha-W4QpbT3Kg5YzmEEjeXHJH1HP9wMSbRbAn516pCEoHEV7YP9_sDhDZWL2icmTnS1IqVab67Hwf2bAlwAC_lfl6bZQSGu3FnuwQjnzc0xpD_O469LPw6vN6ETS5unGEdLmOrBdwxEEDX1X83Y73os6f6avvhwIP6_U50yIlX2bzkvXNS0XBuwwvslWEv97mF2jgJsHFEj7haqgnvkLw0PFn4WhMZoBmXCVDk5GXXjCF_yIlik4_H37mIFN4K_bjGrN493hNuNjSZeSxuxyJjHOrKXcmx8b3HyRJVr0U-FJEKqQwav7ImwCXaW4iaEMVTsQK2hLJtZJUChMhFv04BGvSuYwibpceiV_X4Maem9fv0qvDq4RxcIBT4VGqP2mIHQZGyvmDP9IkMnMjz0eAAaFjYIogbvXnMPf40Cs, title&#x3D;NYタイムズが「広告主」として出稿したネイティブ広告コンテンツとは, ld_url&#x3D;http://blog.logly.co.jp/20140922/000010, category&#x3D;category1}]</code></pre>
                                                         </div>
 
 
@@ -1392,7 +1397,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2017-03-31T15:52:39.295+09:00
+                    Generated 2017-10-16T21:30:26.597+09:00
                 </div>
             </div>
         </div>

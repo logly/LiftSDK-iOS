@@ -2,6 +2,8 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/LoglyLift.svg?maxAge=2592000)](https://cocoapods.org/?q=loglylift)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## 概要
+Version: 0.9.10
+
 * iOS SDK: https://github.com/logly/LiftSDK-iOS
 * Android SDK: https://github.com/logly/LiftSDK-Android
 
@@ -50,7 +52,7 @@ Android版のSDKライブラリをインストールするには、jCenterのmav
 
 ```
 dependencies {
-    compile 'jp.co.logly:lift-sdk:0.9.9'
+    compile 'jp.co.logly:lift-sdk:0.9.10'
 }
 ```
 

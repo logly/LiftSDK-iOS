@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"published_at": @"publishedAt", @"lead": @"lead", @"advertising_subject": @"advertisingSubject", @"score": @"score", @"image_width": @"imageWidth", @"beacon_url": @"beaconUrl", @"image_height": @"imageHeight", @"site": @"site", @"is_article": @"isArticle", @"image_url": @"imageUrl", @"url": @"url", @"title": @"title", @"ld_url": @"ldUrl" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"publishedAt": @"published_at", @"lead": @"lead", @"advertisingSubject": @"advertising_subject", @"score": @"score", @"imageWidth": @"image_width", @"beaconUrl": @"beacon_url", @"imageHeight": @"image_height", @"site": @"site", @"isArticle": @"is_article", @"imageUrl": @"image_url", @"url": @"url", @"title": @"title", @"ldUrl": @"ld_url", @"category": @"category" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"publishedAt", @"lead", @"advertisingSubject", @"score", @"imageWidth", @"beaconUrl", @"imageHeight", @"site", @"isArticle", @"imageUrl", @"url", @"title", @"ldUrl"];
+  NSArray *optionalProperties = @[@"publishedAt", @"lead", @"advertisingSubject", @"score", @"imageWidth", @"beaconUrl", @"imageHeight", @"site", @"isArticle", @"imageUrl", @"url", @"title", @"ldUrl", @"category"];
   return [optionalProperties containsObject:propertyName];
 }
 

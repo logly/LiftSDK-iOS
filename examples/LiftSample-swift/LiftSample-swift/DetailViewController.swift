@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
 
     let kLoglySampleAdspotId = NSNumber(value: 4228263 as Int64)
     let kLoglySampleWidgetId = NSNumber(value: 3624 as Int32)
-    let kLoglySampleRef = "http://blog.logly.co.jp/"
+    let kLoglySampleRef = ""    // NOTE: ref_url can be empty string in mobile sdk.
 
     var detailItem: [String: String]? {
         didSet {
