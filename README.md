@@ -3,6 +3,7 @@
 
 ## 概要
 Version: 0.9.10
+（注：低レベルAPIを使用している場合には`[LGDefaultApi sharedAPI]`としていたのを`[[LGDefaultApi alloc] init]`としてください）
 
 * iOS SDK: https://github.com/logly/LiftSDK-iOS
 * Android SDK: https://github.com/logly/LiftSDK-Android
