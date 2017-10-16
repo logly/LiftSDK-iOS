@@ -88,7 +88,7 @@
 {
     self.sentBeaconIndexes = @{}.mutableCopy;   // clear
     
-    LGDefaultApi* api = [LGDefaultApi sharedAPI];
+    LGDefaultApi* api = [[LGDefaultApi alloc] init];
     [api requestLiftWithAdspotId:adspotId
                         widgetId:widgetId
                              url:url

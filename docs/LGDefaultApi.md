@@ -1,6 +1,6 @@
 # LGDefaultApi
 
-All URIs are relative to *https://l.logly.co.jp/*
+All URIs are relative to *https://l.logly.co.jp*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 # **requestLift**
 ```objc
--(NSNumber*) requestLiftWithAdspotId: (NSNumber*) adspotId
+-(NSURLSessionTask*) requestLiftWithAdspotId: (NSNumber*) adspotId
     widgetId: (NSNumber*) widgetId
     url: (NSString*) url
     ref: (NSString*) ref

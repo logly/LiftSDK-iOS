@@ -53,3 +53,4 @@ fastlane/report.xml
 fastlane/screenshots
 
 git_push.sh
+.swagger-codegen/

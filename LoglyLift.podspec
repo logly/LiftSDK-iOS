@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
     s.name             = "LoglyLift"
-    s.version          = "0.9.9"
+    s.version          = "0.9.10"
 
     s.summary          = "Logly lift.json API"
     s.description      = <<-DESC
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
     s.framework    = 'SystemConfiguration'
 
     s.homepage     = "https://github.com/logly/LiftSDK-iOS"
-    s.license      = "Apache License, Version 2.0"
+    s.license      = "Proprietary"
     s.source       = { :git => "https://github.com/logly/LiftSDK-iOS.git", :tag => "#{s.version}" }
     s.author       = { "Logly co.ltd" => "info@logly.co.jp" }
 
@@ -33,6 +33,6 @@ Pod::Spec.new do |s|
 
     s.dependency 'AFNetworking', '~> 3'
     s.dependency 'JSONModel', '~> 1.2'
-    s.dependency 'ISO8601', '~> 0.5'
+    s.dependency 'ISO8601', '~> 0.6'
 end
 

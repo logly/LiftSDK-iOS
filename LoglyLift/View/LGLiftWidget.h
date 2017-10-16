@@ -13,9 +13,9 @@
 
 /**
  click callback.
- @param widget Lift widget
- @param url URL to go.
- @param item Lift result data.
+ @ param widget Lift widget
+ @ param url URL to go.
+ @ param item Lift result data.
  */
 @property (nonatomic, copy) BOOL (^onWigetItemClickCallback)(LGLiftWidget *widget, NSString *url, LGInlineResponse200Items *item);
 
@@ -27,6 +27,6 @@
  @param widgetId Widget ID, obtained from Logly.
  @param ref Referer URL, can be empty (usually not used in mobile client).
  */
-- (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)wedgetId ref:(NSString*)ref;
+- (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)widgetId ref:(NSString*)ref;
 
 @end
