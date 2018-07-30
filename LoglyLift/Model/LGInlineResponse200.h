@@ -15,6 +15,9 @@
 
 
 #import "LGInlineResponse200Items.h"
+@protocol LGInlineResponse200Items;
+@class LGInlineResponse200Items;
+
 
 
 @protocol LGInlineResponse200

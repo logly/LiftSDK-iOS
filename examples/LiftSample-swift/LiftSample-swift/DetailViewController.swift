@@ -54,7 +54,7 @@ class DetailViewController: UIViewController {
         }
     }
     
-    func longpressed(_ gesture:UIGestureRecognizer) {
+    @objc func longpressed(_ gesture:UIGestureRecognizer) {
         if gesture.state != UIGestureRecognizerState.ended {
             return
         }
