@@ -8,6 +8,7 @@
 
 import XCTest
 
+@available(iOS 9.0, *)
 class LiftSample_swiftUITests: XCTestCase {
         
     override func setUp() {

@@ -1,6 +1,7 @@
 #import "LGSanitizer.h"
 #import "LGObject.h"
 #import "LGQueryParamCollection.h"
+#import "LGDefaultConfiguration.h"
 #import <ISO8601/ISO8601.h>
 
 NSString * const kLGApplicationJSONType = @"application/json";
@@ -63,7 +64,7 @@ NSString * LGPercentEscapedStringFromString(NSString *string) {
         return object;
     }
     else if ([object isKindOfClass:[NSDate class]]) {
-        return [self dateParameterToString:object];
+        return [LGSanitizer dateToString:object];
     }
     else if ([object isKindOfClass:[NSArray class]]) {
         NSArray *objectArray = object;
@@ -107,7 +108,7 @@ NSString * LGPercentEscapedStringFromString(NSString *string) {
         return [param stringValue];
     }
     else if ([param isKindOfClass:[NSDate class]]) {
-        return [self dateParameterToString:param];
+        return [LGSanitizer dateToString:param];
     }
     else if ([param isKindOfClass:[NSArray class]]) {
         NSMutableArray *mutableParam = [NSMutableArray array];
@@ -125,8 +126,9 @@ NSString * LGPercentEscapedStringFromString(NSString *string) {
     }
 }
 
-- (NSString *)dateParameterToString:(id)param {
-    return [param ISO8601String];
++ (NSString *)dateToString:(id)date {
+    NSTimeZone* timeZone = [LGDefaultConfiguration sharedConfig].serializationTimeZone;
+    return [date ISO8601StringWithTimeZone:timeZone usingCalendar:nil];
 }
 
 #pragma mark - Utility Methods
