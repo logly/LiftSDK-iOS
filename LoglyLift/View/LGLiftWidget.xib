@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,14 +41,14 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logly_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dGn-JW-L0S">
-                    <rect key="frame" x="312" y="645" width="51" height="19"/>
+                    <rect key="frame" x="275" y="648" width="91" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="19" id="8pj-Qo-PQZ"/>
-                        <constraint firstAttribute="width" constant="51" id="Pv5-Cw-Hcs"/>
+                        <constraint firstAttribute="height" constant="14" id="8pj-Qo-PQZ"/>
+                        <constraint firstAttribute="width" constant="91" id="Pv5-Cw-Hcs"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended by" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8U0-lF-J6V">
-                    <rect key="frame" x="207" y="644" width="99" height="24"/>
+                    <rect key="frame" x="170" y="644" width="99" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="83" id="WWN-J3-mrZ"/>
                         <constraint firstAttribute="width" constant="99" id="XKa-g7-P2z"/>
@@ -71,13 +71,13 @@
             </subviews>
             <constraints>
                 <constraint firstItem="ztw-BP-beP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="4jT-YF-xyk"/>
-                <constraint firstAttribute="trailing" secondItem="dGn-JW-L0S" secondAttribute="trailing" constant="12" id="5tM-q9-lub"/>
+                <constraint firstAttribute="trailing" secondItem="dGn-JW-L0S" secondAttribute="trailing" constant="9" id="5tM-q9-lub"/>
                 <constraint firstAttribute="trailing" secondItem="mX7-S7-LAQ" secondAttribute="trailing" constant="8" id="EIu-Ys-6Hi"/>
                 <constraint firstAttribute="bottom" secondItem="8U0-lF-J6V" secondAttribute="bottom" constant="-1" id="Eav-Mt-jgU"/>
                 <constraint firstItem="BiP-UC-7kP" firstAttribute="top" secondItem="mX7-S7-LAQ" secondAttribute="bottom" constant="4" id="IL5-eZ-LO9"/>
                 <constraint firstAttribute="trailing" secondItem="BiP-UC-7kP" secondAttribute="trailing" constant="8" id="IR6-su-JRZ"/>
                 <constraint firstItem="BiP-UC-7kP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="LL5-4k-zFf"/>
-                <constraint firstAttribute="bottom" secondItem="dGn-JW-L0S" secondAttribute="bottom" constant="3" id="LtO-er-PgM"/>
+                <constraint firstAttribute="bottom" secondItem="dGn-JW-L0S" secondAttribute="bottom" constant="5" id="LtO-er-PgM"/>
                 <constraint firstItem="dGn-JW-L0S" firstAttribute="leading" secondItem="8U0-lF-J6V" secondAttribute="trailing" constant="6" id="Yse-nX-Fkl"/>
                 <constraint firstItem="agp-0D-8pd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="cSZ-20-q1n"/>
                 <constraint firstItem="mX7-S7-LAQ" firstAttribute="top" secondItem="ztw-BP-beP" secondAttribute="bottom" id="ccD-Bo-VXu"/>
@@ -91,6 +91,6 @@
         </view>
     </objects>
     <resources>
-        <image name="logly_logo.png" width="55" height="21"/>
+        <image name="logly_logo.png" width="53" height="11"/>
     </resources>
 </document>
