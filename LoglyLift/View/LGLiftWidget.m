@@ -19,7 +19,8 @@
 @interface LGLiftWidget ()
 @property UICollectionView* collection;
 @property NSArray<LGInlineResponse200Items>* items;
-@property NSMutableDictionary* sentBeaconIndexes;
+@property NSMutableDictionary* sentBeaconIndexes;       // IndexPath => @YES
+@property NSMutableDictionary* loadingImageTasks;       // IndexPath => NSURLSessionDataTask
 @end
 
 @implementation LGLiftWidget
@@ -87,6 +88,7 @@
 - (void) requestByURL:(NSString*) url adspotId:(NSNumber*)adspotId widgetId:(NSNumber*)widgetId ref:(NSString*)ref
 {
     self.sentBeaconIndexes = @{}.mutableCopy;   // clear
+    self.loadingImageTasks = @{}.mutableCopy;   // clear
     
     LGDefaultApi* api = [[LGDefaultApi alloc] init];
     [api requestLiftWithAdspotId:adspotId
@@ -154,11 +156,15 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LGLiftWidgetCell *cell = (LGLiftWidgetCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"LGLiftWidgetCell" forIndexPath:indexPath];
-    cell.textLabel.text = nil;
-    cell.subtextLabel.text = nil;
-    cell.imageView.image = nil;
 
-    if (self.items != nil && indexPath.item < self.items.count) {
+    if (self.items != nil &&
+        indexPath.item < self.items.count &&
+        !self.loadingImageTasks[@(indexPath.item)] )
+    {
+        cell.textLabel.text = nil;
+        cell.subtextLabel.text = nil;
+        cell.imageView.image = nil;
+
         LGInlineResponse200Items *item = self.items[indexPath.item];
         cell.textLabel.text = item.title;
         cell.subtextLabel.text = nil;
@@ -166,30 +172,32 @@
             cell.subtextLabel.text = [@"PR: " stringByAppendingString: item.advertisingSubject];
         }
         
-        dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(q_global, ^{
-            // image.
-            NSString *imageUrl = item.imageUrl;
-            NSError *error = nil;
-
-            if (imageUrl != nil) {
-                imageUrl = [self resolveUrl:imageUrl referenceUrl:item.url];
-                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl] options:NSDataReadingUncached error:&error];
+        // image.
+        NSString *imageUrl = item.imageUrl;
+        if (imageUrl != nil) {
+            imageUrl = [self resolveUrl:imageUrl referenceUrl:item.url];
+            NSURLSession *sesssion = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [sesssion dataTaskWithURL:[NSURL URLWithString:imageUrl]
+                                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+            {
                 if (error != nil) {
                     NSLog(@"LiftWidget - error while getting image: %@", error.localizedDescription);
                     return;
                 }
 
                 UIImage *image = [UIImage imageWithData:data];
-
                 if (image != nil ) {
                     dispatch_queue_t q_main   = dispatch_get_main_queue();
                     dispatch_async(q_main, ^{
-                        cell.imageView.image = image;
+                        LGLiftWidgetCell *imageCell = (LGLiftWidgetCell*)[collectionView cellForItemAtIndexPath:indexPath];
+                        imageCell.imageView.image = image;
+                        [self.loadingImageTasks removeObjectForKey: @(indexPath.item)];
                     });
                 }
-            }
-        });
+            }];
+            [dataTask resume];
+            self.loadingImageTasks[@(indexPath.item)] = dataTask;
+        }
     }
     return cell;
 }
@@ -235,6 +243,13 @@
         }
     }
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl]];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+  didEndDisplayingCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.loadingImageTasks removeObjectForKey: @(indexPath.item)];
 }
 
 - (NSString*)resolveUrl:(NSString*)url referenceUrl:(NSString*)ref

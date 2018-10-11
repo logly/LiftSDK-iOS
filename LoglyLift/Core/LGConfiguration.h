@@ -15,7 +15,7 @@
 */
 
 
-static NSString * const kLGAPIVersion = @"0.9.12";
+static NSString * const kLGAPIVersion = @"0.9.12.1";
 
 @protocol LGConfiguration <NSObject>
 
