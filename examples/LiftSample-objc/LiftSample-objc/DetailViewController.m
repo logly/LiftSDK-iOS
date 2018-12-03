@@ -47,15 +47,17 @@
                              widgetId:kLoglySampleWidgetId
                                   ref:kLoglySampleRef];
         
+        __weak typeof(self) weakSelf = self;
         self.liftWidget.onWigetItemClickCallback = ^(LGLiftWidget *widget, NSString *url, LGInlineResponse200Items *item) {
-            if (self.isDebugMode) {
+            if (!weakSelf) { return NO; }
+            if (weakSelf.isDebugMode) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Debug Mode"
                                                                                message:url
                                                                         preferredStyle:UIAlertControllerStyleAlert];
                 [alert addAction: [UIAlertAction actionWithTitle:@"Dissmis"
                                                            style:UIAlertActionStyleDefault
                                                          handler:nil] ];
-                [self presentViewController:alert animated: YES completion: nil];
+                [weakSelf presentViewController:alert animated: YES completion: nil];
                 return YES;
             }
             return NO;

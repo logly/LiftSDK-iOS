@@ -40,12 +40,13 @@ class DetailViewController: UIViewController {
                                     adspotId:kLoglySampleAdspotId,
                                     widgetId:kLoglySampleWidgetId,
                                     ref:kLoglySampleRef)
-                
-                liftWidget.onWigetItemClickCallback = {(widget, url, item) -> Bool in
-                    if self.isDebugMode {
+
+                liftWidget.onWigetItemClickCallback = {[weak self] (widget, url, item) -> Bool in
+                    guard let strongSelf = self else { return false }
+                    if strongSelf.isDebugMode {
                         let alert = UIAlertController(title: "Debug Mode", message: url, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:nil))
-                        self.present(alert, animated: true, completion: nil)
+                        strongSelf.present(alert, animated: true, completion: nil)
                         return true;
                     }
                     return false;
