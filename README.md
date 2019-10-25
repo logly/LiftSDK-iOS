@@ -166,7 +166,7 @@ SDKのAPI clientを使用して直接lift APIへアクセスし、レコメン�
 シンプルwidgetの内部でもこのAPI clientを使用しています。SDKのソースコードも公開していますので、widgetのコードも参考にしてください。
 API clientの仕様については、別ファイルのAPIドキュメント[API.html](//:./API.html)を参照してください。
 
-注：API clientを使用する場合には計測のために、ビューが見えた時にbeaconUrlを、クリックされた時にldUrlを呼ぶ必要があるので注意してください。
+注：API clientを使用する場合には計測のために、ビューが見えた時にbeaconUrlを、クリックされた時にUrlを呼ぶ必要があるので注意してください。
 
 ---
 
