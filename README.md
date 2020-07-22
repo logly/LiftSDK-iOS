@@ -155,7 +155,7 @@ AndroidやiOSでうまく広告が配信されない場合、UserAgentの設計�
 
 - Androidの場合(例)
 
-```Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Mobile Safari/537.36
+```Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Mobile Safari/537.36```
 
 ### ○　サンプルアプリについて
 #### iOS (Swift or Objective-C)版サンプルアプリの実行方法
